@@ -9,9 +9,6 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   List img = [
-    'img/i1.jpg',
-    'img/i1.jpg',
-    'img/i2.jpg',
     'img/i3.jpg',
     'img/i4.jpg',
     'img/i5.jpg',
@@ -21,52 +18,43 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: const Color(0xffFE5720),
-      drawer: const Drawer(),
-      appBar: AppBar(
-          title: const Text('Apple Prodects'),
-          backgroundColor: const Color(0xffFE5720)),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Column(
-              children: [
-                const Padding(
-                  padding:  EdgeInsets.only(top: 70, bottom: 15),
-                  child:  Text(
-                    'Lifestyle sale',
-                    style: TextStyle(fontSize: 25),
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {},
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xffFE5720),
+        drawer: Drawer(),
+        appBar: AppBar(
+          backgroundColor: Color(0xffFE5720),
+          title: Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: Text('Apple Products'),
+          ),
+        ),
+        body: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.85,
+              width: double.infinity,
+              child: ListView.builder(
+                itemCount: img.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      width: 150,
-                      color: Colors.grey,
-                      child: const Text(
-                        'Shop Now',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )),
-              ]
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(img[index]),
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.blue),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          ListView.builder(
-            itemCount: img.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Image.asset(img[index]),
-                ),
-              );
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
